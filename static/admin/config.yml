@@ -2,7 +2,8 @@ backend:
   name: github
   repo: aisyiyahberkoh/aisyiyahberkoh.github.io
   branch: main
-  base_url: https://github.com
+  auth_type: pkce
+  app_id: Ov23liHkAHdLoMCx0EMA
 
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
