@@ -3,3 +3,4 @@
 .hugo_build.lock
 public/
 hugo_stats.json
+RECAP.md
