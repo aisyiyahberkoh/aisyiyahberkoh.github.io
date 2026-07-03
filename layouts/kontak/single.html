@@ -1,0 +1,51 @@
+{{ define "main" }}
+<div class="gradient-hero pt-28 pb-16 px-4">
+  <div class="max-w-[1200px] mx-auto">
+    <h1 class="text-3xl md:text-5xl font-heading font-bold text-white">{{ .Title }}</h1>
+    {{ if .Params.description }}
+      <p class="text-white/80 text-lg mt-3 max-w-2xl">{{ .Params.description }}</p>
+    {{ end }}
+  </div>
+</div>
+<div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div>
+      <article class="prose prose-lg prose-headings:font-heading prose-a:text-[#00843D] max-w-none">
+        {{ .Content }}
+      </article>
+      <div class="mt-8 space-y-4">
+        <div class="flex items-center gap-4 p-4 bg-cream rounded-xl">
+          <div class="w-12 h-12 rounded-lg bg-[#00843D]/10 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#00843D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <p class="text-sm text-[#6B7280]">WhatsApp</p>
+            <a href="https://wa.me/{{ site.Params.whatsapp }}" class="font-semibold hover:text-[#00843D]" target="_blank">{{ site.Params.whatsapp }}</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 bg-cream rounded-xl">
+          <div class="w-12 h-12 rounded-lg bg-[#00843D]/10 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#00843D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <p class="text-sm text-[#6B7280]">Email</p>
+            <a href="mailto:{{ site.Params.email }}" class="font-semibold hover:text-[#00843D]">{{ site.Params.email }}</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 bg-cream rounded-xl">
+          <div class="w-12 h-12 rounded-lg bg-[#00843D]/10 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#00843D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </div>
+          <div>
+            <p class="text-sm text-[#6B7280]">Instagram</p>
+            <a href="https://instagram.com/{{ site.Params.instagram }}" class="font-semibold hover:text-[#00843D]" target="_blank">@{{ site.Params.instagram }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rounded-2xl overflow-hidden shadow-lg h-96 bg-gradient-to-br from-[#00843D]/10 to-[#C9A84C]/10 flex items-center justify-center">
+      <p class="text-[#6B7280]">Google Maps Embed</p>
+    </div>
+  </div>
+</div>
+{{ end }}
