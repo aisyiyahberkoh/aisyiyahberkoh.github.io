@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+  <h2 class="section-title">Pengurus Aisyiyah Ranting Berkoh</h2>
+  <p class="section-subtitle">{{ .Params.description }}</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+    {{ range .Pages }}
+      <div class="bg-white rounded-xl p-6 shadow-md border border-gray-100 text-center hover:shadow-xl transition-shadow">
+        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[#00843D] to-[#C9A84C] mx-auto mb-4 flex items-center justify-center text-white text-3xl font-heading font-bold">
+          {{ substr .Params.name 0 1 }}
+        </div>
+        <h3 class="font-heading font-bold text-lg">{{ .Params.name }}</h3>
+        <p class="text-[#00843D] font-semibold text-sm">{{ .Params.position }}</p>
+        {{ if .Content }}
+          <p class="text-[#6B7280] text-sm mt-2">{{ .Content }}</p>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
