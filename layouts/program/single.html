@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="gradient-hero pt-28 pb-16 px-4">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="flex items-center gap-4 mb-4">
+      <span class="text-4xl">{{ .Params.icon }}</span>
+      <div>
+        <h1 class="text-3xl md:text-5xl font-heading font-bold text-white">{{ .Title }}</h1>
+        <p class="text-white/80 text-lg mt-2">{{ .Params.description }}</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-3 mt-4">
+      <span class="inline-block text-sm font-semibold text-white bg-white/20 px-3 py-1 rounded-full">{{ .Params.category }}</span>
+      {{ if .Params.schedule }}
+        <span class="inline-block text-sm font-semibold text-white bg-white/20 px-3 py-1 rounded-full">{{ .Params.schedule }}</span>
+      {{ end }}
+    </div>
+  </div>
+</div>
+<div class="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="prose prose-lg max-w-none prose-headings:font-heading prose-a:text-[#00843D]">
+    {{ .Content }}
+  </article>
+  <div class="mt-10 pt-8 border-t border-gray-200">
+    <a href="/program/" class="btn-outline">&larr; Kembali ke Program</a>
+  </div>
+</div>
+{{ end }}
