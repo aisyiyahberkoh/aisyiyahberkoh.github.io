@@ -1,0 +1,27 @@
+<section class="py-20 bg-white">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="section-title">Berita Terbaru</h2>
+    <p class="section-subtitle">Ikuti kegiatan dan perkembangan terbaru dari Aisyiyah Ranting Berkoh</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {{ range first 3 (where site.RegularPages "Section" "berita") }}
+        <a href="{{ .RelPermalink }}" class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
+          {{ if .Params.image }}
+            <div class="h-48 overflow-hidden">
+              <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+          {{ end }}
+          <div class="p-5">
+            {{ if .Date }}
+              <p class="text-sm text-[#6B7280] mb-2">{{ .Date.Format "2 January 2006" }}</p>
+            {{ end }}
+            <h3 class="font-heading font-bold text-lg group-hover:text-[#00843D] transition-colors">{{ .Title }}</h3>
+            <p class="text-[#6B7280] text-sm mt-2 line-clamp-2">{{ .Params.description }}</p>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+    <div class="text-center mt-10">
+      <a href="/berita/" class="btn-outline">Lihat Semua Berita</a>
+    </div>
+  </div>
+</section>

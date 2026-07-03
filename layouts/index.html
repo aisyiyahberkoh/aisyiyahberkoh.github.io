@@ -1,0 +1,42 @@
+{{ define "main" }}
+{{ partial "hero.html" . }}
+
+{{/* Sekilas Tentang */}}
+<section class="py-20 bg-white">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="text-[#00843D] font-semibold text-sm uppercase tracking-wider">Sekilas Tentang</span>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mt-2 mb-6">Aisyiyah Ranting Berkoh</h2>
+        <div class="text-[#6B7280] leading-relaxed space-y-4">
+          {{ .Content }}
+        </div>
+        <a href="/tentang/" class="btn-primary mt-6 inline-block">Selengkapnya</a>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+          <div class="w-full h-full bg-gradient-to-br from-[#00843D]/20 to-[#C9A84C]/20 flex items-center justify-center">
+            <span class="text-[#00843D] font-heading font-bold text-lg">Foto Gedung Aisyiyah</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ partial "programs-section.html" . }}
+{{ partial "news-section.html" . }}
+
+{{/* Lokasi */}}
+<section class="py-20 bg-cream">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="section-title">Lokasi Kami</h2>
+    <p class="section-subtitle">Temukan kami di Gedung Aisyiyah, Berkoh</p>
+    <div class="rounded-2xl overflow-hidden shadow-lg">
+      <div class="aspect-[21/9] bg-gradient-to-br from-[#00843D]/10 to-[#C9A84C]/10 flex items-center justify-center">
+        <p class="text-[#6B7280]">Google Maps Embed — {{ site.Params.alamat }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

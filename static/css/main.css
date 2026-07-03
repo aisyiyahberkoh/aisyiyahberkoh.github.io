@@ -1677,6 +1677,9 @@
     line-height: var(--tw-leading, var(--text-lg--line-height));
     color: #6B7280;
   }
+  .bg-cream {
+    background-color: #FFFDF5;
+  }
 }
 @property --tw-rotate-x {
   syntax: "*";

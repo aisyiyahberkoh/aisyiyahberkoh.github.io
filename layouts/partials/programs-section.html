@@ -1,0 +1,22 @@
+<section class="py-20 bg-cream">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="section-title">Program Unggulan</h2>
+    <p class="section-subtitle">Berbagai program dan kegiatan yang kami selenggarakan untuk masyarakat</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {{ range first 4 (where site.RegularPages "Section" "program") }}
+        <a href="{{ .RelPermalink }}" class="group bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:-translate-y-1">
+          {{ if .Params.icon }}
+            <div class="w-12 h-12 rounded-lg bg-[#00843D]/10 flex items-center justify-center mb-4 group-hover:bg-[#00843D] transition-colors">
+              <span class="text-[#00843D] group-hover:text-white transition-colors text-xl">{{ .Params.icon }}</span>
+            </div>
+          {{ end }}
+          <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-[#00843D] transition-colors">{{ .Title }}</h3>
+          <p class="text-[#6B7280] text-sm leading-relaxed">{{ .Params.description }}</p>
+          {{ if .Params.schedule }}
+            <p class="text-xs text-[#C9A84C] font-semibold mt-3">{{ .Params.schedule }}</p>
+          {{ end }}
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>

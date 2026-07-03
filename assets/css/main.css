@@ -51,4 +51,7 @@
     @apply text-lg text-center mb-12 max-w-2xl mx-auto;
     color: #6B7280;
   }
+  .bg-cream {
+    background-color: #FFFDF5;
+  }
 }
