@@ -9,12 +9,10 @@
     "build": "npm run build:css && hugo --gc --minify"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.6",
     "tailwindcss": "^4.1.6"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.2",
-    "lightningcss-darwin-arm64": "^1.32.0",
-    "postcss-cli": "^11.0.1"
+    "@tailwindcss/typography": "^0.5.20"
   }
 }
