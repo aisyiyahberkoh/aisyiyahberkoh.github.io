@@ -18,6 +18,36 @@ title = "Aisyiyah Ranting Berkoh"
 [build]
   writeStats = true
 
+[[menu.main]]
+  name = "Beranda"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Tentang"
+  url = "/tentang/"
+  weight = 2
+
+[[menu.main]]
+  name = "Program"
+  url = "/program/"
+  weight = 3
+
+[[menu.main]]
+  name = "Berita"
+  url = "/berita/"
+  weight = 4
+
+[[menu.main]]
+  name = "Galeri"
+  url = "/galeri/"
+  weight = 5
+
+[[menu.main]]
+  name = "Kontak"
+  url = "/kontak/"
+  weight = 6
+
 [module]
   [[module.mounts]]
     source = "static"

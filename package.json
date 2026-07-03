@@ -2,8 +2,19 @@
   "name": "aisyiyah-ranting-berkoh",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "dev:css": "tailwindcss -i assets/css/main.css -o static/css/main.css --watch",
+    "build:css": "tailwindcss -i assets/css/main.css -o static/css/main.css",
+    "dev": "npm run build:css && hugo server -D",
+    "build": "npm run build:css && hugo --gc --minify"
+  },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.6",
     "tailwindcss": "^4.1.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "lightningcss-darwin-arm64": "^1.32.0",
+    "postcss-cli": "^11.0.1"
   }
 }

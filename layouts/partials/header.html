@@ -1,0 +1,33 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+  <nav class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      <img src="{{ site.Params.logo }}" alt="Logo Aisyiyah" class="h-10 w-auto">
+      <span class="font-heading font-bold text-lg hidden sm:block" style="color: #1A2B3D;">
+        Aisyiyah Ranting Berkoh
+      </span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      {{ $currentPage := . }}
+      {{ range site.Menus.main }}
+        <a href="{{ .URL }}"
+           class="font-medium text-sm transition-colors duration-200 hover:text-[#00843D] {{ if $currentPage.IsMenuCurrent .Menu . }}text-[#00843D]{{ else }}text-[#6B7280]{{ end }}">
+          {{ .Name }}
+        </a>
+      {{ end }}
+    </div>
+    <button id="hamburger" class="md:hidden" aria-label="Toggle menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-4">
+    {{ range site.Menus.main }}
+      <a href="{{ .URL }}" class="block py-2 text-sm font-medium text-[#6B7280] hover:text-[#00843D]">{{ .Name }}</a>
+    {{ end }}
+  </div>
+</header>
+
+<script>
+  document.getElementById('hamburger')?.addEventListener('click', () => {
+    document.getElementById('mobile-menu')?.classList.toggle('hidden');
+  });
+</script>
