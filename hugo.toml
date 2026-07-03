@@ -1,0 +1,24 @@
+baseURL = "https://aisyiyahberkoh.github.io"
+locale = "id-ID"
+title = "Aisyiyah Ranting Berkoh"
+
+[params]
+  description = "Aisyiyah Ranting Berkoh — Organisasi Wanita Islam Muhammadiyah"
+  logo = "/images/logo-aisyiyah.svg"
+  whatsapp = "628xxxxx"
+  email = "aisyiyah.berkoh@gmail.com"
+  instagram = "aisyiyahberkoh"
+  youtube = ""
+  alamat = "Gedung Aisyiyah, Berkoh, Kec. Purwokerto Selatan, Kab. Banyumas"
+  maps_url = "https://maps.google.com/?q=..."
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[build]
+  writeStats = true
+
+[module]
+  [[module.mounts]]
+    source = "static"
+    target = "static"

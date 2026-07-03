@@ -1,0 +1,9 @@
+{
+  "name": "aisyiyah-ranting-berkoh",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.6",
+    "tailwindcss": "^4.1.6"
+  }
+}
