@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="95" fill="#00843D"/>
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#C9A84C" stroke-width="2"/>
+  <!-- Crescent -->
+  <path d="M75 60 Q120 60 120 100 Q120 140 75 140 Q100 130 100 100 Q100 70 75 60Z" fill="#C9A84C"/>
+  <!-- Star -->
+  <polygon points="100,50 106,70 128,70 110,82 117,103 100,90 83,103 90,82 72,70 94,70" fill="#C9A84C"/>
+  <text x="100" y="175" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="16" font-weight="700" fill="#C9A84C">AISYIYAH</text>
+</svg>

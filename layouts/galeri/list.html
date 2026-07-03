@@ -23,4 +23,37 @@
     {{ end }}
   </div>
 </div>
+
+<script>
+(function() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);cursor:pointer;align-items:center;justify-content:center;';
+  const img = document.createElement('img');
+  img.style.cssText = 'max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5);';
+  overlay.appendChild(img);
+  document.body.appendChild(overlay);
+
+  document.getElementById('gallery-grid').addEventListener('click', function(e) {
+    const item = e.target.closest('.gallery-item');
+    if (!item) return;
+    const src = item.querySelector('img').src;
+    img.src = src;
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function closeLightbox() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+})();
+</script>
 {{ end }}

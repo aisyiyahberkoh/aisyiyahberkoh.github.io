@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <circle cx="16" cy="16" r="15" fill="#00843D"/>
+  <circle cx="16" cy="16" r="13" fill="none" stroke="#C9A84C" stroke-width="1"/>
+  <!-- Crescent -->
+  <path d="M10 10 Q18 10 18 16 Q18 22 10 22 Q14 19 14 16 Q14 13 10 10Z" fill="#C9A84C"/>
+  <!-- Star -->
+  <polygon points="16,8 17.5,13 22,13 18.5,16 20,21 16,18 12,21 13.5,16 10,13 14.5,13" fill="#C9A84C"/>
+</svg>

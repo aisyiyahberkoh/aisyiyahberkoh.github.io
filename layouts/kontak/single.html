@@ -43,8 +43,27 @@
         </div>
       </div>
     </div>
-    <div class="rounded-2xl overflow-hidden shadow-lg h-96 bg-gradient-to-br from-[#00843D]/10 to-[#C9A84C]/10 flex items-center justify-center">
-      <p class="text-[#6B7280]">Google Maps Embed</p>
+    <div class="rounded-2xl overflow-hidden shadow-lg h-96">
+      <iframe src="{{ site.Params.maps_url }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="mt-12 lg:col-span-2">
+      <h2 class="font-heading font-bold text-2xl mb-6">Kirim Pesan</h2>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4 max-w-lg">
+        <div>
+          <label class="block text-sm font-medium text-[#1A2B3D] mb-1">Nama</label>
+          <input type="text" name="name" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#00843D] focus:ring-2 focus:ring-[#00843D]/20 outline-none transition-all">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-[#1A2B3D] mb-1">Email</label>
+          <input type="email" name="email" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#00843D] focus:ring-2 focus:ring-[#00843D]/20 outline-none transition-all">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-[#1A2B3D] mb-1">Pesan</label>
+          <textarea name="message" rows="4" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#00843D] focus:ring-2 focus:ring-[#00843D]/20 outline-none transition-all"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Kirim Pesan</button>
+      </form>
     </div>
   </div>
 </div>
