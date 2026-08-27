@@ -258,6 +258,24 @@
       max-width: 96rem;
     }
   }
+  .m-191 {
+    margin: calc(var(--spacing) * 191);
+  }
+  .m-211 {
+    margin: calc(var(--spacing) * 211);
+  }
+  .m-268 {
+    margin: calc(var(--spacing) * 268);
+  }
+  .m-593 {
+    margin: calc(var(--spacing) * 593);
+  }
+  .m-630 {
+    margin: calc(var(--spacing) * 630);
+  }
+  .m-815 {
+    margin: calc(var(--spacing) * 815);
+  }
   .mx-auto {
     margin-inline: auto;
   }
