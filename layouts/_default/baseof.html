@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
   {{ partial "head.html" . }}
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- Performance optimization: defer Netlify Identity script to prevent blocking HTML parsing and initial render -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </head>
 <body class="bg-white font-body antialiased">
   {{ partial "header.html" . }}
