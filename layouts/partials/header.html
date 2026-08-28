@@ -9,19 +9,23 @@
     <div class="hidden md:flex items-center gap-8">
       {{ $currentPage := . }}
       {{ range site.Menus.main }}
+        {{ $isActive := or ($currentPage.IsMenuCurrent .Menu .) ($currentPage.HasMenuCurrent .Menu .) }}
         <a href="{{ .URL }}"
-           class="font-medium text-sm transition-colors duration-200 hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] rounded px-1 py-0.5 {{ if $currentPage.IsMenuCurrent .Menu . }}text-[#00843D]{{ else }}text-[#6B7280]{{ end }}">
+           class="font-medium text-sm transition-colors duration-200 hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] rounded px-1 py-0.5 {{ if $isActive }}text-[#00843D]{{ else }}text-[#6B7280]{{ end }}"
+           {{ if $isActive }}aria-current="page"{{ end }}>
           {{ .Name }}
         </a>
       {{ end }}
     </div>
-    <button id="hamburger" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D]" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+    <button id="hamburger" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D]" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-menu">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </nav>
   <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-4">
+    {{ $currentPage := . }}
     {{ range site.Menus.main }}
-      <a href="{{ .URL }}" class="block py-2 text-sm font-medium text-[#6B7280] hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] rounded px-2">{{ .Name }}</a>
+      {{ $isActive := or ($currentPage.IsMenuCurrent .Menu .) ($currentPage.HasMenuCurrent .Menu .) }}
+      <a href="{{ .URL }}" class="block py-2 text-sm font-medium hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] rounded px-2 {{ if $isActive }}text-[#00843D]{{ else }}text-[#6B7280]{{ end }}" {{ if $isActive }}aria-current="page"{{ end }}>{{ .Name }}</a>
     {{ end }}
   </div>
 </header>
@@ -31,7 +35,9 @@
   const mobileMenuNav = document.getElementById('mobile-menu');
   hamburgerBtn?.addEventListener('click', () => {
     const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-    hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
+    const nextState = !isExpanded;
+    hamburgerBtn.setAttribute('aria-expanded', nextState);
+    hamburgerBtn.setAttribute('aria-label', nextState ? 'Tutup menu navigasi' : 'Buka menu navigasi');
     mobileMenuNav?.classList.toggle('hidden');
   });
 </script>
