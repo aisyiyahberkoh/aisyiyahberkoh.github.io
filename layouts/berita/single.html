@@ -19,7 +19,7 @@
 <div class="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
   {{ if .Params.image }}
     <!-- Performance optimization: Add native lazy loading for single post banner image -->
-    <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full rounded-xl mb-8" loading="lazy">
+    <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full rounded-xl mb-8" loading="lazy" decoding="async">
   {{ end }}
   <article class="prose prose-lg max-w-none prose-headings:font-heading prose-a:text-[#00843D]">
     {{ .Content }}

@@ -11,7 +11,7 @@
     {{ if $images }}
       {{ range $images }}
         <div class="gallery-item cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 aspect-square">
-          <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy">
+          <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
         </div>
       {{ end }}
     {{ else }}

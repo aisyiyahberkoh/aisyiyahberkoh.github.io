@@ -8,7 +8,7 @@
           {{ if .Params.image }}
             <div class="h-48 overflow-hidden">
               <!-- Performance optimization: Add native lazy loading for images below hero section -->
-              <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async">
             </div>
           {{ end }}
           <div class="p-5">

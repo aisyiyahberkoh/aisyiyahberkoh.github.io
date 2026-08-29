@@ -15,7 +15,7 @@
       <a href="{{ .RelPermalink }}" class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
         {{ if .Params.image }}
           <!-- Performance optimization: Add native lazy loading for news grid images -->
-          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-48 object-cover" loading="lazy">
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-48 object-cover" loading="lazy" decoding="async">
         {{ else }}
           <div class="w-full h-48 bg-[#00843D]/10 flex items-center justify-center text-4xl">📰</div>
         {{ end }}
