@@ -11,7 +11,8 @@
     {{ if $images }}
       {{ range $images }}
         <div class="gallery-item cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 aspect-square">
-          <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy">
+          <!-- Performance optimization: Add native lazy loading and async decoding -->
+          <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
         </div>
       {{ end }}
     {{ else }}
@@ -29,6 +30,7 @@
   const overlay = document.createElement('div');
   overlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);cursor:pointer;align-items:center;justify-content:center;';
   const img = document.createElement('img');
+  img.decoding = 'async';
   img.style.cssText = 'max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5);';
   overlay.appendChild(img);
   document.body.appendChild(overlay);
