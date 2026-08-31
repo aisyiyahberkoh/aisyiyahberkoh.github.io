@@ -3,8 +3,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <!-- Performance optimization: Add native lazy loading for footer logo below the fold -->
-          <img src="{{ site.Params.logo }}" alt="Logo Aisyiyah" class="h-10 w-auto brightness-0 invert" loading="lazy">
+          <!-- Performance optimization: Add native lazy loading and async decoding for footer logo below the fold -->
+          <img src="{{ site.Params.logo }}" alt="Logo Aisyiyah" class="h-10 w-auto brightness-0 invert" loading="lazy" decoding="async">
           <span class="font-heading font-bold text-lg">Aisyiyah Ranting Berkoh</span>
         </div>
         <p class="text-gray-400 text-sm leading-relaxed">
