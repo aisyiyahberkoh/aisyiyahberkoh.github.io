@@ -10,10 +10,10 @@
     {{ $images := .Resources.ByType "image" }}
     {{ if $images }}
       {{ range $images }}
-        <div class="gallery-item cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 aspect-square">
+        <button type="button" aria-label="Lihat foto {{ .Name }}" class="gallery-item w-full cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2 transition-all duration-300 hover:-translate-y-1 aspect-square">
           <!-- Performance optimization: Add native lazy loading and async decoding -->
-          <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
-        </div>
+          <img src="{{ .RelPermalink }}" alt="" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
+        </button>
       {{ end }}
     {{ else }}
       <div class="col-span-full text-center py-20 text-[#6B7280]">
@@ -28,33 +28,57 @@
 <script>
 (function() {
   const overlay = document.createElement('div');
-  overlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);cursor:pointer;align-items:center;justify-content:center;';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Pratinjau foto');
+  overlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);align-items:center;justify-content:center;';
+
   const img = document.createElement('img');
   img.decoding = 'async';
   img.style.cssText = 'max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5);';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button';
+  closeBtn.setAttribute('aria-label', 'Tutup pratinjau foto');
+  closeBtn.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>';
+  closeBtn.style.cssText = 'position:absolute;top:20px;right:20px;color:white;background:rgba(255,255,255,0.2);border:none;border-radius:9999px;padding:8px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;';
+  closeBtn.className = 'hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
+
   overlay.appendChild(img);
+  overlay.appendChild(closeBtn);
   document.body.appendChild(overlay);
 
-  document.getElementById('gallery-grid').addEventListener('click', function(e) {
+  let lastActiveElement = null;
+
+  document.getElementById('gallery-grid')?.addEventListener('click', function(e) {
     const item = e.target.closest('.gallery-item');
     if (!item) return;
-    const src = item.querySelector('img').src;
-    img.src = src;
+    lastActiveElement = item;
+    const imgEl = item.querySelector('img');
+    if (imgEl) {
+      img.src = imgEl.src;
+      img.alt = item.getAttribute('aria-label') || '';
+    }
     overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    closeBtn.focus();
   });
 
+  closeBtn.addEventListener('click', closeLightbox);
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay) closeLightbox();
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'Escape' && overlay.style.display === 'flex') closeLightbox();
   });
 
   function closeLightbox() {
     overlay.style.display = 'none';
     document.body.style.overflow = '';
+    if (lastActiveElement) {
+      lastActiveElement.focus();
+    }
   }
 })();
 </script>

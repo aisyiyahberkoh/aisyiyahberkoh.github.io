@@ -985,6 +985,9 @@
   .h-5 {
     height: calc(var(--spacing) * 5);
   }
+  .h-6 {
+    height: calc(var(--spacing) * 6);
+  }
   .h-10 {
     height: calc(var(--spacing) * 10);
   }
@@ -1017,6 +1020,9 @@
   }
   .w-5 {
     width: calc(var(--spacing) * 5);
+  }
+  .w-6 {
+    width: calc(var(--spacing) * 6);
   }
   .w-12 {
     width: calc(var(--spacing) * 12);
@@ -1506,6 +1512,14 @@
     .hover\:bg-\[\#00843D\]\/10:hover {
       background-color: color-mix(in oklab, #00843D 10%, transparent);
     }
+    .hover\:bg-white\/30:hover {
+      background-color: color-mix(in srgb, #fff 30%, transparent);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-white\/30:hover {
+        background-color: color-mix(in oklab, var(--color-white) 30%, transparent);
+      }
+    }
     .hover\:text-\[\#00843D\]:hover {
       color: #00843D;
     }
@@ -1533,6 +1547,9 @@
   }
   .focus-visible\:ring-\[\#00843D\]:focus-visible {
     --tw-ring-color: #00843D;
+  }
+  .focus-visible\:ring-white:focus-visible {
+    --tw-ring-color: var(--color-white);
   }
   .focus-visible\:ring-offset-2:focus-visible {
     --tw-ring-offset-width: 2px;
