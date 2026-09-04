@@ -10,6 +10,7 @@
   <main class="min-h-screen">
     {{ block "main" . }}{{ end }}
   </main>
-  {{ partial "footer.html" . }}
+  {{/* Performance optimization: Cache static footer partial across all pages to avoid re-evaluating template during site generation */}}
+  {{ partialCached "footer.html" . }}
 </body>
 </html>
