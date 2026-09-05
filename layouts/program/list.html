@@ -31,21 +31,33 @@
 </div>
 
 <script>
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('bg-[#00843D]', 'text-white');
-        b.classList.add('bg-gray-100', 'text-[#6B7280]');
-        b.setAttribute('aria-selected', 'false');
+  // Performance optimization: Use event delegation and cache DOM queries to avoid redundant querySelectorAll calls on click
+  (function() {
+    const filterContainer = document.getElementById('program-filters');
+    if (!filterContainer) return;
+
+    const filterButtons = filterContainer.querySelectorAll('.filter-btn');
+    const programCards = document.querySelectorAll('.program-card');
+
+    filterContainer.addEventListener('click', (event) => {
+      const clickedBtn = event.target.closest('.filter-btn');
+      if (!clickedBtn || clickedBtn.getAttribute('aria-selected') === 'true') return;
+
+      filterButtons.forEach(btn => {
+        btn.classList.remove('bg-[#00843D]', 'text-white');
+        btn.classList.add('bg-gray-100', 'text-[#6B7280]');
+        btn.setAttribute('aria-selected', 'false');
       });
-      btn.classList.remove('bg-gray-100', 'text-[#6B7280]');
-      btn.classList.add('bg-[#00843D]', 'text-white');
-      btn.setAttribute('aria-selected', 'true');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.program-card').forEach(card => {
+
+      clickedBtn.classList.remove('bg-gray-100', 'text-[#6B7280]');
+      clickedBtn.classList.add('bg-[#00843D]', 'text-white');
+      clickedBtn.setAttribute('aria-selected', 'true');
+
+      const filter = clickedBtn.dataset.filter;
+      programCards.forEach(card => {
         card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
       });
     });
-  });
+  })();
 </script>
 {{ end }}
