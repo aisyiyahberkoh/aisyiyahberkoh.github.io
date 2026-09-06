@@ -6,7 +6,8 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </head>
 <body class="bg-white font-body antialiased">
-  {{ partial "header.html" . }}
+  {{/* Performance optimization: Cache header partial per section (.Section) to speed up Hugo site generation while preserving active section menu state */}}
+  {{ partialCached "header.html" . .Section }}
   <main class="min-h-screen">
     {{ block "main" . }}{{ end }}
   </main>
