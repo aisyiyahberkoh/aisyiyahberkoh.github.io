@@ -34,11 +34,27 @@
 <script>
   const hamburgerBtn = document.getElementById('hamburger');
   const mobileMenuNav = document.getElementById('mobile-menu');
-  hamburgerBtn?.addEventListener('click', () => {
+
+  function toggleMobileMenu(forceClose = false) {
+    if (!hamburgerBtn || !mobileMenuNav) return;
     const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-    const nextState = !isExpanded;
+    const nextState = forceClose ? false : !isExpanded;
+
     hamburgerBtn.setAttribute('aria-expanded', nextState);
     hamburgerBtn.setAttribute('aria-label', nextState ? 'Tutup menu navigasi' : 'Buka menu navigasi');
-    mobileMenuNav?.classList.toggle('hidden');
+    if (nextState) {
+      mobileMenuNav.classList.remove('hidden');
+    } else {
+      mobileMenuNav.classList.add('hidden');
+    }
+  }
+
+  hamburgerBtn?.addEventListener('click', () => toggleMobileMenu());
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && hamburgerBtn?.getAttribute('aria-expanded') === 'true') {
+      toggleMobileMenu(true);
+      hamburgerBtn.focus();
+    }
   });
 </script>
