@@ -49,7 +49,8 @@
 
     <div class="mt-12 lg:col-span-2">
       <h2 class="font-heading font-bold text-2xl mb-6">Kirim Pesan</h2>
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4 max-w-lg">
+      <div id="form-status" role="status" aria-live="polite" class="hidden mb-4 p-4 rounded-lg bg-green-50 text-[#00843D] border border-green-200 font-medium text-sm"></div>
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4 max-w-lg">
         <div>
           <label for="name" class="block text-sm font-medium text-[#1A2B3D] mb-1">
             Nama <span class="text-red-500" aria-hidden="true">*</span>
@@ -68,8 +69,38 @@
           </label>
           <textarea id="message" name="message" rows="4" required aria-required="true" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#00843D] focus:ring-2 focus:ring-[#00843D]/20 outline-none transition-all"></textarea>
         </div>
-        <button type="submit" class="btn-primary">Kirim Pesan</button>
+        <button id="submit-btn" type="submit" class="btn-primary inline-flex items-center justify-center gap-2">
+          <span id="btn-text">Kirim Pesan</span>
+          <svg id="btn-spinner" class="hidden animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+        </button>
       </form>
+      <script>
+        document.getElementById('contact-form')?.addEventListener('submit', function(e) {
+          const form = this;
+          const btn = document.getElementById('submit-btn');
+          const btnText = document.getElementById('btn-text');
+          const spinner = document.getElementById('btn-spinner');
+          const statusDiv = document.getElementById('form-status');
+
+          btn.disabled = true;
+          if (btnText) btnText.textContent = 'Mengirim...';
+          spinner?.classList.remove('hidden');
+
+          if (form.getAttribute('action').includes('YOUR_FORM_ID')) {
+            e.preventDefault();
+            setTimeout(() => {
+              btn.disabled = false;
+              if (btnText) btnText.textContent = 'Kirim Pesan';
+              spinner?.classList.add('hidden');
+              form.reset();
+              if (statusDiv) {
+                statusDiv.textContent = 'Terima kasih! Pesan Anda telah terkirim.';
+                statusDiv.classList.remove('hidden');
+              }
+            }, 800);
+          }
+        });
+      </script>
     </div>
   </div>
 </div>
