@@ -7,3 +7,7 @@
 ## 2025-02-27 - Caching static Hugo partials with partialCached
 **Learning:** Static Hugo partials like `footer.html` that depend only on `site.Params` and `site.Menus` can be cached with `partialCached` to avoid redundant template parsing and execution across all site pages during build.
 **Action:** Use `partialCached` for footer or other globally static partials that do not depend on page-specific context (`.` or `$currentPage`).
+
+## 2025-02-27 - Preloading critical above-the-fold site logo in Hugo head
+**Learning:** Preloading the site logo asset in `<head>` via `<link rel="preload" href="{{ . | relURL }}" as="image">` eliminates resource discovery delay during HTML parsing, improving LCP and FCP. Matching `relURL` between preload hint and `<img>` src prevents duplicate asset fetches.
+**Action:** Always wrap parameter logo preloads in `{{ with site.Params.logo }}` and pipe through `relURL` to safely handle relative pathing and missing parameters.
