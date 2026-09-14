@@ -24,8 +24,9 @@
   </div>
 </section>
 
-{{ partial "programs-section.html" . }}
-{{ partial "news-section.html" . }}
+{{/* Performance optimization: Cache static homepage section partials to avoid re-querying and re-evaluating templates during site build */}}
+{{ partialCached "programs-section.html" . }}
+{{ partialCached "news-section.html" . }}
 
 {{/* Lokasi */}}
 <section class="py-20 bg-cream">
