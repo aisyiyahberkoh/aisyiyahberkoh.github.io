@@ -7,3 +7,7 @@
 ## 2025-02-27 - Caching static Hugo partials with partialCached
 **Learning:** Static Hugo partials like `footer.html` that depend only on `site.Params` and `site.Menus` can be cached with `partialCached` to avoid redundant template parsing and execution across all site pages during build.
 **Action:** Use `partialCached` for footer or other globally static partials that do not depend on page-specific context (`.` or `$currentPage`).
+
+## 2025-02-27 - Section-based caching for section-aware Hugo partials
+**Learning:** Using `.RelPermalink` as a variant key for `partialCached` causes a 100% cache miss rate because every page has a unique route. For partials like `header.html` whose active menu highlight state depends only on section context, keying `partialCached` with `.Section` and `.IsHome` reuses rendered template output across all pages within the same section during site generation.
+**Action:** Use `.Section` and `.IsHome` as variant keys when using `partialCached` for section-aware navigation partials.
