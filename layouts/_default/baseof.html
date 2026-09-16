@@ -6,7 +6,8 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </head>
 <body class="bg-white font-body antialiased">
-  {{ partial "header.html" . }}
+  {{/* Performance optimization: Cache header partial per section (.Section .IsHome) to avoid re-evaluating menu active state logic for every page in the same section during build */}}
+  {{ partialCached "header.html" . .Section .IsHome }}
   <main class="min-h-screen">
     {{ block "main" . }}{{ end }}
   </main>
