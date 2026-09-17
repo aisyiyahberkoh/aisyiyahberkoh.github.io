@@ -4,6 +4,8 @@
 <meta name="description" content="{{ .Params.description | default site.Params.description }}">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<!-- Performance optimization: pre-resolve DNS for Google Maps embedded iframe -->
+<link rel="dns-prefetch" href="https://www.google.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Asynchronous non-render-blocking font loading to prevent FCP blocking -->
