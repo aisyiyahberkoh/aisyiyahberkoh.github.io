@@ -7,3 +7,7 @@
 ## 2025-02-27 - Caching static Hugo partials with partialCached
 **Learning:** Static Hugo partials like `footer.html` that depend only on `site.Params` and `site.Menus` can be cached with `partialCached` to avoid redundant template parsing and execution across all site pages during build.
 **Action:** Use `partialCached` for footer or other globally static partials that do not depend on page-specific context (`.` or `$currentPage`).
+
+## 2025-05-20 - Event delegation & DOM caching vs Hugo partialCached in single-eval templates
+**Learning:** Using `partialCached` on templates that evaluate only once per site build (like `layouts/index.html`) yields zero build performance gains. Instead, client-side event delegation and DOM node caching in list filter scripts eliminate redundant DOM queries and event listener memory overhead during user interactions.
+**Action:** For client-side UI filters, cache DOM query selectors outside event handlers and use event delegation on parent containers.
