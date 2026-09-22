@@ -9,10 +9,8 @@
     "build": "npm run build:css && hugo --gc --minify"
   },
   "dependencies": {
-    "tailwindcss": "^4.1.6"
-  },
-  "devDependencies": {
     "@tailwindcss/cli": "^4.3.2",
-    "@tailwindcss/typography": "^0.5.20"
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "^4.1.6"
   }
 }
