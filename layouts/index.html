@@ -1,5 +1,6 @@
 {{ define "main" }}
-{{ partial "hero.html" . }}
+{{/* Performance optimization: Cache static hero partial across page renders to avoid re-evaluating template during site generation */}}
+{{ partialCached "hero.html" . }}
 
 {{/* Sekilas Tentang */}}
 <section class="py-20 bg-white">
