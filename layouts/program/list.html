@@ -9,9 +9,9 @@
   {{ $programs := where site.RegularPages "Section" "program" }}
   {{ $categories := slice "Pendidikan" "Keagamaan" "Sosial" }}
   <div class="flex flex-wrap gap-2 mb-10" id="program-filters" role="tablist" aria-label="Filter Program">
-    <button class="filter-btn active px-4 py-2 rounded-full text-sm font-semibold bg-[#00843D] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2 transition-colors" role="tab" aria-selected="true" data-filter="all">Semua</button>
+    <button class="filter-btn active px-4 py-2 rounded-full text-sm font-semibold bg-[#00843D] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2 transition-colors" role="tab" aria-selected="true" tabindex="0" data-filter="all">Semua</button>
     {{ range $categories }}
-      <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-[#6B7280] hover:bg-[#00843D]/10 hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2 transition-colors" role="tab" aria-selected="false" data-filter="{{ . }}">{{ . }}</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-[#6B7280] hover:bg-[#00843D]/10 hover:text-[#00843D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2 transition-colors" role="tab" aria-selected="false" tabindex="-1" data-filter="{{ . }}">{{ . }}</button>
     {{ end }}
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="program-grid">
@@ -28,24 +28,67 @@
       </a>
     {{ end }}
   </div>
+  <div id="no-programs" class="hidden text-center py-12 text-[#6B7280]">
+    <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+    <p class="text-lg font-medium">Tidak ada program dalam kategori ini</p>
+    <p class="text-sm mt-1">Silakan pilih kategori lain untuk melihat program kami.</p>
+  </div>
 </div>
 
 <script>
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('bg-[#00843D]', 'text-white');
-        b.classList.add('bg-gray-100', 'text-[#6B7280]');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.remove('bg-gray-100', 'text-[#6B7280]');
-      btn.classList.add('bg-[#00843D]', 'text-white');
-      btn.setAttribute('aria-selected', 'true');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.program-card').forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
-      });
+(function() {
+  const tabs = Array.from(document.querySelectorAll('.filter-btn'));
+  const tabList = document.getElementById('program-filters');
+  const cards = document.querySelectorAll('.program-card');
+  const noPrograms = document.getElementById('no-programs');
+
+  function selectTab(btn) {
+    tabs.forEach(t => {
+      t.classList.remove('bg-[#00843D]', 'text-white');
+      t.classList.add('bg-gray-100', 'text-[#6B7280]');
+      t.setAttribute('aria-selected', 'false');
+      t.setAttribute('tabindex', '-1');
     });
+    btn.classList.remove('bg-gray-100', 'text-[#6B7280]');
+    btn.classList.add('bg-[#00843D]', 'text-white');
+    btn.setAttribute('aria-selected', 'true');
+    btn.setAttribute('tabindex', '0');
+    btn.focus();
+
+    const filter = btn.dataset.filter;
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const show = filter === 'all' || card.dataset.category === filter;
+      card.style.display = show ? 'block' : 'none';
+      if (show) visibleCount++;
+    });
+    if (noPrograms) {
+      noPrograms.classList.toggle('hidden', visibleCount > 0);
+    }
+  }
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => selectTab(btn));
   });
+
+  tabList?.addEventListener('keydown', (e) => {
+    const currentIndex = tabs.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
+    let nextIndex = currentIndex;
+    if (e.key === 'ArrowRight') {
+      nextIndex = (currentIndex + 1) % tabs.length;
+    } else if (e.key === 'ArrowLeft') {
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (e.key === 'Home') {
+      nextIndex = 0;
+    } else if (e.key === 'End') {
+      nextIndex = tabs.length - 1;
+    } else {
+      return;
+    }
+    e.preventDefault();
+    selectTab(tabs[nextIndex]);
+  });
+})();
 </script>
 {{ end }}
