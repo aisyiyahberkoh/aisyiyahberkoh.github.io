@@ -5,3 +5,14 @@
 [build.environment]
   HUGO_VERSION = "0.163.3"
   NODE_VERSION = "24"
+
+# Performance optimization: Enable 1-year immutable caching for static CSS and images to avoid unnecessary revalidations and improve repeat-view load speed
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
