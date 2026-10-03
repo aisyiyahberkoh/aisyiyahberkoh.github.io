@@ -44,24 +44,62 @@
   closeBtn.style.cssText = 'position:absolute;top:20px;right:20px;color:white;background:rgba(255,255,255,0.2);border:none;border-radius:9999px;padding:8px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;';
   closeBtn.className = 'hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
 
+  const prevBtn = document.createElement('button');
+  prevBtn.type = 'button';
+  prevBtn.setAttribute('aria-label', 'Foto sebelumnya');
+  prevBtn.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>';
+  prevBtn.style.cssText = 'position:absolute;left:20px;color:white;background:rgba(255,255,255,0.2);border:none;border-radius:9999px;padding:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+  prevBtn.className = 'hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
+
+  const nextBtn = document.createElement('button');
+  nextBtn.type = 'button';
+  nextBtn.setAttribute('aria-label', 'Foto selanjutnya');
+  nextBtn.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
+  nextBtn.style.cssText = 'position:absolute;right:20px;color:white;background:rgba(255,255,255,0.2);border:none;border-radius:9999px;padding:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+  nextBtn.className = 'hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
+
+  overlay.appendChild(prevBtn);
   overlay.appendChild(img);
+  overlay.appendChild(nextBtn);
   overlay.appendChild(closeBtn);
   document.body.appendChild(overlay);
 
   let lastActiveElement = null;
+  let items = [];
+  let currentIndex = -1;
 
-  document.getElementById('gallery-grid')?.addEventListener('click', function(e) {
-    const item = e.target.closest('.gallery-item');
-    if (!item) return;
-    lastActiveElement = item;
+  function showImage(index) {
+    if (index < 0 || index >= items.length) return;
+    currentIndex = index;
+    const item = items[currentIndex];
     const imgEl = item.querySelector('img');
     if (imgEl) {
       img.src = imgEl.src;
       img.alt = item.getAttribute('aria-label') || '';
     }
+  }
+
+  document.getElementById('gallery-grid')?.addEventListener('click', function(e) {
+    const item = e.target.closest('.gallery-item');
+    if (!item) return;
+    items = Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
+    lastActiveElement = item;
+    const index = items.indexOf(item);
+    showImage(index);
+    const navVisible = items.length > 1 ? 'flex' : 'none';
+    prevBtn.style.display = navVisible;
+    nextBtn.style.display = navVisible;
     overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     closeBtn.focus();
+  });
+
+  prevBtn.addEventListener('click', function() {
+    showImage((currentIndex - 1 + items.length) % items.length);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    showImage((currentIndex + 1) % items.length);
   });
 
   closeBtn.addEventListener('click', closeLightbox);
@@ -70,7 +108,19 @@
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && overlay.style.display === 'flex') closeLightbox();
+    if (overlay.style.display !== 'flex') return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && items.length > 1) showImage((currentIndex - 1 + items.length) % items.length);
+    if (e.key === 'ArrowRight' && items.length > 1) showImage((currentIndex + 1) % items.length);
+    if (e.key === 'Tab') {
+      const focusables = items.length > 1 ? [prevBtn, nextBtn, closeBtn] : [closeBtn];
+      const idx = focusables.indexOf(document.activeElement);
+      if (e.shiftKey) {
+        if (idx <= 0) { focusables[focusables.length - 1].focus(); e.preventDefault(); }
+      } else {
+        if (idx === focusables.length - 1 || idx === -1) { focusables[0].focus(); e.preventDefault(); }
+      }
+    }
   });
 
   function closeLightbox() {
