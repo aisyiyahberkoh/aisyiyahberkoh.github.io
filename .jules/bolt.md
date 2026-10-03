@@ -7,3 +7,7 @@
 ## 2025-02-27 - Caching static Hugo partials with partialCached
 **Learning:** Static Hugo partials like `footer.html` that depend only on `site.Params` and `site.Menus` can be cached with `partialCached` to avoid redundant template parsing and execution across all site pages during build.
 **Action:** Use `partialCached` for footer or other globally static partials that do not depend on page-specific context (`.` or `$currentPage`).
+
+## 2025-02-27 - Speculative prefetching with Speculation Rules API in SSGs
+**Learning:** Adding Speculation Rules API (`type="speculationrules"`) in document `<head>` enables modern browsers to speculatively prefetch same-origin HTML pages on link hover/focus, reducing internal page navigation latency to ~0ms without client-side script overhead. Additionally, preloading header logo resources must check `with site.Params.logo` and pipe through `relURL` to prevent empty preloads or incorrect relative paths across subpages.
+**Action:** Use Speculation Rules API for instant internal navigation in static sites and always wrap Hugo parameter preloads in `with` guards piped with `relURL`.
