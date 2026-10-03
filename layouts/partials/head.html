@@ -13,3 +13,24 @@
 </noscript>
 <link rel="stylesheet" href="{{ "/css/main.css" | relURL }}">
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+{{ with site.Params.logo }}
+<!-- Performance optimization: Preload critical above-the-fold logo image during head parsing for faster LCP/FCP -->
+<link rel="preload" as="image" href="{{ . | relURL }}">
+{{ end }}
+<!-- Performance optimization: Speculative prefetching via Speculation Rules API for instant (~0ms) same-origin page transitions -->
+<script type="speculationrules">
+{
+  "prefetch": [
+    {
+      "source": "document",
+      "where": {
+        "and": [
+          { "href_matches": "/*" },
+          { "not": { "href_matches": "/admin/*" } }
+        ]
+      },
+      "eagerness": "moderate"
+    }
+  ]
+}
+</script>
