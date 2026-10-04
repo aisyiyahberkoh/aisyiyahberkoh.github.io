@@ -7,7 +7,7 @@
 </head>
 <body class="bg-white font-body antialiased">
   {{ partial "header.html" . }}
-  <main class="min-h-screen">
+  <main id="main-content" class="min-h-screen">
     {{ block "main" . }}{{ end }}
   </main>
   {{/* Performance optimization: Cache static footer partial across all pages to avoid re-evaluating template during site generation */}}
