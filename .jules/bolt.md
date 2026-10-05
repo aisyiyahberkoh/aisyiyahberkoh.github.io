@@ -7,3 +7,7 @@
 ## 2025-02-27 - Caching static Hugo partials with partialCached
 **Learning:** Static Hugo partials like `footer.html` that depend only on `site.Params` and `site.Menus` can be cached with `partialCached` to avoid redundant template parsing and execution across all site pages during build.
 **Action:** Use `partialCached` for footer or other globally static partials that do not depend on page-specific context (`.` or `$currentPage`).
+
+## 2026-10-05 - Avoid lazy loading for Largest Contentful Paint (LCP) images
+**Learning:** Using `loading="lazy"` on above-the-fold or primary hero/featured images (like single post banner images) delays browser fetch initiation until layout calculation completes, significantly degrading Largest Contentful Paint (LCP).
+**Action:** Use `fetchpriority="high"` (without `loading="lazy"`) for LCP candidate images to enable immediate priority fetching by the browser's speculative HTML parser.
