@@ -2,8 +2,15 @@
 <html lang="id">
 <head>
   {{ partial "head.html" . }}
-  <!-- Performance optimization: defer Netlify Identity script to prevent blocking HTML parsing and initial render -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
+  <!-- Performance optimization: Conditionally load Netlify Identity script only when identity hash is present -->
+  <script>
+    if (window.location.hash && (window.location.hash.indexOf('access_token=') >= 0 || window.location.hash.indexOf('recovery_token=') >= 0 || window.location.hash.indexOf('invite_token=') >= 0 || window.location.hash.indexOf('confirmation_token=') >= 0)) {
+      var script = document.createElement('script');
+      script.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  </script>
 </head>
 <body class="bg-white font-body antialiased">
   {{ partial "header.html" . }}
