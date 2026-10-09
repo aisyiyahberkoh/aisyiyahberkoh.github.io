@@ -6,8 +6,11 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </head>
 <body class="bg-white font-body antialiased">
+  <a href="#main-content" class="fixed top-4 left-4 z-[100] -translate-y-24 focus:translate-y-0 transition-transform duration-200 px-4 py-2 bg-[#00843D] text-white font-medium text-sm rounded-lg shadow-lg outline-none ring-2 ring-offset-2 ring-[#00843D]">
+    Lompati ke konten utama
+  </a>
   {{ partial "header.html" . }}
-  <main class="min-h-screen">
+  <main id="main-content" tabindex="-1" class="min-h-screen outline-none">
     {{ block "main" . }}{{ end }}
   </main>
   {{/* Performance optimization: Cache static footer partial across all pages to avoid re-evaluating template during site generation */}}
