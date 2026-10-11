@@ -41,4 +41,12 @@
     hamburgerBtn.setAttribute('aria-label', nextState ? 'Tutup menu navigasi' : 'Buka menu navigasi');
     mobileMenuNav?.classList.toggle('hidden');
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && hamburgerBtn?.getAttribute('aria-expanded') === 'true') {
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.setAttribute('aria-label', 'Buka menu navigasi');
+      mobileMenuNav?.classList.add('hidden');
+      hamburgerBtn.focus();
+    }
+  });
 </script>
