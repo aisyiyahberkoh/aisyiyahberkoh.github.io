@@ -6,7 +6,8 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </head>
 <body class="bg-white font-body antialiased">
-  {{ partial "header.html" . }}
+  {{/* Performance optimization: Cache static header partial across all pages to avoid re-evaluating template during site generation */}}
+  {{ partialCached "header.html" . }}
   <main class="min-h-screen">
     {{ block "main" . }}{{ end }}
   </main>
