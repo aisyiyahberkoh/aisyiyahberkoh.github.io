@@ -32,13 +32,30 @@
 </header>
 
 <script>
-  const hamburgerBtn = document.getElementById('hamburger');
-  const mobileMenuNav = document.getElementById('mobile-menu');
-  hamburgerBtn?.addEventListener('click', () => {
-    const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-    const nextState = !isExpanded;
-    hamburgerBtn.setAttribute('aria-expanded', nextState);
-    hamburgerBtn.setAttribute('aria-label', nextState ? 'Tutup menu navigasi' : 'Buka menu navigasi');
-    mobileMenuNav?.classList.toggle('hidden');
-  });
+  (function() {
+    const hamburgerBtn = document.getElementById('hamburger');
+    const mobileMenuNav = document.getElementById('mobile-menu');
+
+    function closeMobileMenu() {
+      if (!hamburgerBtn || !mobileMenuNav) return;
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.setAttribute('aria-label', 'Buka menu navigasi');
+      mobileMenuNav.classList.add('hidden');
+    }
+
+    hamburgerBtn?.addEventListener('click', () => {
+      const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+      const nextState = !isExpanded;
+      hamburgerBtn.setAttribute('aria-expanded', nextState);
+      hamburgerBtn.setAttribute('aria-label', nextState ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+      mobileMenuNav?.classList.toggle('hidden');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && hamburgerBtn?.getAttribute('aria-expanded') === 'true') {
+        closeMobileMenu();
+        hamburgerBtn.focus();
+      }
+    });
+  })();
 </script>
