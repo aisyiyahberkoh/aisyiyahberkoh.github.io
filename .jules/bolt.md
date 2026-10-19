@@ -7,3 +7,7 @@
 ## 2025-02-27 - Caching static Hugo partials with partialCached
 **Learning:** Static Hugo partials like `footer.html` that depend only on `site.Params` and `site.Menus` can be cached with `partialCached` to avoid redundant template parsing and execution across all site pages during build.
 **Action:** Use `partialCached` for footer or other globally static partials that do not depend on page-specific context (`.` or `$currentPage`).
+
+## 2025-02-27 - Avoid partialCached on single-instance layout partials
+**Learning:** Using `partialCached` on partials within single-instance templates (such as `layouts/index.html`) yields zero build performance improvement since the layout is evaluated only once per build, and risks cache leakage across languages or output formats if cache key variants are missing.
+**Action:** Do not attempt to cache homepage-only partials with `partialCached`; reserve `partialCached` for partials rendered repeatedly across many pages.
